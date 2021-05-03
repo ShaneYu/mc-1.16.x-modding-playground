@@ -1,0 +1,10 @@
+{
+    "homepage": "https://github.com/shaneyu/mc-1.16.x-modding-playground",
+    "1.16.5": {
+        "0.0.0": "https://github.com/shaneyu/mc-1.16.x-modding-playground/blob/1.16.x/CHANGELOG.md"
+    },
+    "promos": {
+        "1.16.5-latest": "0.0.0",
+        "1.16.5-recommended": "0.0.0"
+    }
+}
