@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "playground:block/generator/solar_generator",
+    "up": "playground:block/generator/solar_generator_top_on",
+    "north": "playground:block/generator/solar_generator",
+    "south": "playground:block/generator/solar_generator",
+    "east": "playground:block/generator/solar_generator",
+    "west": "playground:block/generator/solar_generator"
+  }
+}
