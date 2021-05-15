@@ -8,32 +8,34 @@ import com.github.shaneyu.playground.common.block.attribute.AttributeStateActive
 import com.github.shaneyu.playground.common.block.attribute.AttributeStateFacing;
 import com.github.shaneyu.playground.common.block.interfaces.IHasTileEntity;
 import com.github.shaneyu.playground.common.config.PlaygroundConfig;
-import com.github.shaneyu.playground.common.tile.interfaces.ITileActivatable;
+import com.github.shaneyu.playground.common.tile.interfaces.ITileActive;
 import com.github.shaneyu.playground.common.tile.interfaces.ITileDirectional;
 import com.github.shaneyu.playground.common.tile.interfaces.ITileSound;
-import com.github.shaneyu.playground.common.util.NBTConstants;
-import com.github.shaneyu.playground.common.util.NBTUtil;
-import com.github.shaneyu.playground.common.util.TextComponentUtil;
-import com.github.shaneyu.playground.common.util.WorldUtil;
+import com.github.shaneyu.playground.common.util.*;
+import com.github.shaneyu.playground.lib.item.IWrench;
 import com.github.shaneyu.playground.lib.provider.IBlockProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.function.IntSupplier;
 
-public abstract class TileEntityBase extends TileEntityUpdatable implements ITickableTileEntity, ITileActivatable, ITileDirectional, ITileSound {
+public abstract class TileEntityBase extends TileEntityUpdatable implements ITickableTileEntity, ITileActive, ITileDirectional, ITileSound {
     protected final IBlockProvider blockProvider;
 
     private boolean isActivatable;
@@ -186,6 +188,33 @@ public abstract class TileEntityBase extends TileEntityUpdatable implements ITic
         }
 
         return compound;
+    }
+
+    public WrenchResult tryWrench(BlockState state, PlayerEntity player, Hand hand, BlockRayTraceResult rayTrace) {
+        ItemStack stack = player.getHeldItem(hand);
+
+        if (!stack.isEmpty()) {
+            IWrench wrenchHandler = PlaygroundUtil.getWrench(stack);
+
+            if (wrenchHandler != null) {
+                if (wrenchHandler.canUseWrench(stack, player, rayTrace.getPos())) {
+                    if (player.isSneaking()) {
+                        WorldUtil.dismantleBlock(state, getWorld(), pos, this);
+
+                        return WrenchResult.DISMANTLED;
+                    }
+
+                    // Special ITileDirectional handling
+                    if (isDirectional() && Attribute.get(getBlockType(), AttributeStateFacing.class).canRotate()) {
+                        setFacing(getDirection().rotateY());
+                    }
+
+                    return WrenchResult.SUCCESS;
+                }
+            }
+        }
+
+        return WrenchResult.PASS;
     }
 
 

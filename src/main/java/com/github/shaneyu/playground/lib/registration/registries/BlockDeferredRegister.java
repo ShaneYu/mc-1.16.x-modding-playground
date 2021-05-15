@@ -50,7 +50,7 @@ public class BlockDeferredRegister extends DoubleWrappedDeferredRegister<Block, 
         return register(name, blockSupplier, block -> itemCreator.apply(block, defaultItemProperties.get()));
     }
 
-    private static <BLOCK extends Block & IHasDescription> BlockRegistryObject<BLOCK, BlockItemTooltip<BLOCK>> registerBlock(
+    public <BLOCK extends Block & IHasDescription> BlockRegistryObject<BLOCK, BlockItemTooltip<BLOCK>> registerBlock(
             String name, Supplier<? extends BLOCK> blockSupplier) {
 
         return BLOCKS.registerDefaultProperties(name, blockSupplier, BlockItemTooltip::new);

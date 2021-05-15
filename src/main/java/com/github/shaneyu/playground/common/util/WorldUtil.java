@@ -3,6 +3,7 @@ package com.github.shaneyu.playground.common.util;
 import com.github.shaneyu.playground.Playground;
 import com.github.shaneyu.playground.common.config.PlaygroundConfig;
 import com.github.shaneyu.playground.common.tile.interfaces.IHasActiveState;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -94,5 +95,16 @@ public final class WorldUtil {
 
         // NOTE: This line below is now (1.16+) called by the mark chunk dirty method (without even validating if it is loaded).
         // And with it causes issues where chunks are easily ghost loaded.
+    }
+
+    /** Dismantles a block, dropping it and removing it from the world. */
+    public static void dismantleBlock(BlockState state, World world, BlockPos pos) {
+        dismantleBlock(state, world, pos, getTileEntity(world, pos));
+    }
+
+    /** Dismantles a block, dropping it and removing it from the world. */
+    public static void dismantleBlock(BlockState state, World world, BlockPos pos, @Nullable TileEntity tile) {
+        Block.spawnDrops(state, world, pos, tile);
+        world.removeBlock(pos, false);
     }
 }

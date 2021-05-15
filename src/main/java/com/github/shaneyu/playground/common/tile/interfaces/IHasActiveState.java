@@ -8,14 +8,10 @@ public interface IHasActiveState {
     void setActive(boolean active);
 
     /** Whether or not this block has a visual effect when it is on it's active state. Used for rendering */
-    default boolean renderUpdate() {
-        return false;
-    }
+    boolean renderUpdate();
 
     /** Whether or not this block should use a different light value when it is on it's active state. */
-    default boolean lightUpdate() {
-        return false;
-    }
+    boolean lightUpdate();
 
     default int getActiveLightValue() {
         return PlaygroundConfig.client.ambientLightingLevel.get();

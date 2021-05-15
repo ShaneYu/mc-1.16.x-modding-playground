@@ -1,6 +1,8 @@
 package com.github.shaneyu.playground.datagen.providers.common;
 
 import com.github.shaneyu.playground.Playground;
+import com.github.shaneyu.playground.common.registration.PlaygroundItems;
+import com.github.shaneyu.playground.common.tag.PlaygroundTags;
 import com.github.shaneyu.playground.lib.datagen.tag.BaseTagProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -21,6 +23,12 @@ public class PlaygroundTagsProvider extends BaseTagProvider {
 
     @Override
     protected void registerTags() {
-        // TODO: Register mod tags here
+        addWrenches();
+    }
+
+    private void addWrenches() {
+        addToTag(PlaygroundTags.Items.WRENCHES, PlaygroundItems.WRENCH);
+        getItemBuilder(PlaygroundTags.Items.TOOLS).add(PlaygroundTags.Items.TOOLS_WRENCH);
+        addToTag(PlaygroundTags.Items.TOOLS_WRENCH, PlaygroundItems.WRENCH);
     }
 }

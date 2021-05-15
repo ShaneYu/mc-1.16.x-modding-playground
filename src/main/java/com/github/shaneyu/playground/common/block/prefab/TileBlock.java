@@ -5,6 +5,7 @@ import com.github.shaneyu.playground.common.block.interfaces.IHasTileEntity;
 import com.github.shaneyu.playground.common.block.type.BlockTypeTile;
 import com.github.shaneyu.playground.common.config.PlaygroundConfig;
 import com.github.shaneyu.playground.common.tile.TileEntityBase;
+import com.github.shaneyu.playground.common.tile.WrenchResult;
 import com.github.shaneyu.playground.common.tile.interfaces.IHasActiveState;
 import com.github.shaneyu.playground.common.util.WorldUtil;
 import net.minecraft.block.Block;
@@ -71,7 +72,9 @@ public class TileBlock<TILE extends TileEntityBase, TYPE extends BlockTypeTile<T
             return genericClientActivated(player, handIn, hit);
         }
 
-        // TODO: When we had a wrench to rotate blocks etc, this is where we should wire it in
+        if (tile.tryWrench(state, player, handIn, hit) != WrenchResult.PASS) {
+            return ActionResultType.SUCCESS;
+        }
 
         return ActionResultType.PASS;
     }

@@ -1,8 +1,15 @@
 package com.github.shaneyu.playground.common.util;
 
 import com.github.shaneyu.playground.Playground;
+import com.github.shaneyu.playground.common.integration.GenericWrench;
+import com.github.shaneyu.playground.common.tag.PlaygroundTags;
+import com.github.shaneyu.playground.lib.item.IWrench;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nullable;
 
 public final class PlaygroundUtil {
     private PlaygroundUtil() {}
@@ -39,5 +46,23 @@ public final class PlaygroundUtil {
      */
     public static Direction getRight(Direction orientation) {
         return orientation.rotateYCCW();
+    }
+
+    /**
+     * Gets the wrench if the item is an IWrench, or a generic implementation if the item is in the forge wrenches tag
+     */
+    @Nullable
+    public static IWrench getWrench(ItemStack it) {
+        Item item = it.getItem();
+
+        if (item instanceof IWrench) {
+            return (IWrench) item;
+        }
+
+        if (item.isIn(PlaygroundTags.Items.WRENCHES)) {
+            return GenericWrench.INSTANCE;
+        }
+
+        return null;
     }
 }

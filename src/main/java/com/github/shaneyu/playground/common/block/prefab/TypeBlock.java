@@ -21,8 +21,6 @@ public class TypeBlock<TYPE extends BlockType> extends BaseBlock implements IHas
     protected TypeBlock(TYPE blockType, Properties properties) {
         super(applyPropertyChanges(blockType, properties));
         this.blockType = blockType;
-
-        setDefaultState(stateContainer.getBaseState());
     }
 
     @Override
