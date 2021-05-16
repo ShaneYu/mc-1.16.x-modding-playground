@@ -19,6 +19,7 @@
   "color.playground.white": "White",
   "color.playground.yellow": "Yellow",
   "constant.playground.mod_name": "Playground",
+  "constants.playground.log_format": "[%s] %s",
   "description.playground.solar_generator": "A generator that generates energy during the day from sun.",
   "direction.playground.down": "Down",
   "direction.playground.east": "East",
@@ -36,5 +37,9 @@
   "side.playground.right": "Right",
   "side.playground.top": "Top",
   "tooltip.playground.hold_for_description": "Hold %s for a description.",
-  "tooltip.playground.hold_for_details": "Hold %s for details."
+  "tooltip.playground.hold_for_details": "Hold %s for details.",
+  "wrench.playground.configure_state": "Configure State: %s",
+  "wrench.playground.mode_dismantle": "Dismantle",
+  "wrench.playground.mode_rotate": "Rotate",
+  "wrench.playground.state": "State: %s"
 }

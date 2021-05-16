@@ -11,6 +11,9 @@ public enum PlaygroundLang implements ILanguageEntry {
     // Generic
     GENERIC("generic", "format"),
 
+    // GUI
+    LOG_FORMAT("constants", "log_format"),
+
     // Directions
     DOWN("direction", "down"),
     UP("direction", "up"),
@@ -52,8 +55,20 @@ public enum PlaygroundLang implements ILanguageEntry {
     HOLD_FOR_DESCRIPTION("tooltip", "hold_for_description"),
 
     // Keys
+    KEY_HAND_MODE("key", "mode"),
     KEY_DETAILS_MODE("key", "details"),
     KEY_DESCRIPTION_MODE("key", "description"),
+
+    // Wrench modes
+    WRENCH_MODE_DISMANTLE("wrench", "mode_dismantle"),
+    WRENCH_MODE_ROTATE("wrench", "mode_rotate"),
+
+    // Wrench states
+    WRENCH_CONFIGURE_STATE("wrench", "configure_state"),
+    WRENCH_STATE("wrench", "state"),
+
+    // Tooltips
+    MODE("tooltip", "mode"),
 
     // Descriptions
     DESCRIPTION_SOLAR_GENERATOR("description", "solar_generator");

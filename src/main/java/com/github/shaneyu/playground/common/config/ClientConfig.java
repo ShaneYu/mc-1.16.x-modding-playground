@@ -15,6 +15,7 @@ public class ClientConfig implements IConfig {
     public final BooleanValue machineEffects;
     public final BooleanValue enableAmbientLighting;
     public final IntValue ambientLightingLevel;
+    public final BooleanValue allowModeScroll;
 
     ClientConfig() {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -39,6 +40,10 @@ public class ClientConfig implements IConfig {
         ambientLightingLevel = builder
                 .comment("How much light to produce if ambient lighting is enabled.")
                 .defineInRange("ambientLightingLevel", 15, 1, 15);
+
+        allowModeScroll = builder
+                .comment("Allow sneak + scroll to change item modes.")
+                .define("allowModeScroll", true);
 
         builder.pop();
         configSpec = builder.build();

@@ -45,6 +45,9 @@ public class PlaygroundLanguageProvider extends LanguageProvider {
             add(color.getLangEntry(), color.getEnglishName());
         }
 
+        // GUI
+        add(PlaygroundLang.LOG_FORMAT, "[%s] %s");
+
         // Generic
         add(PlaygroundLang.GENERIC, "%s");
 
@@ -71,6 +74,14 @@ public class PlaygroundLanguageProvider extends LanguageProvider {
         // Keys
         add(PlaygroundLang.KEY_DETAILS_MODE, "Show Details");
         add(PlaygroundLang.KEY_DESCRIPTION_MODE, "Show Description");
+
+        // Wrench states
+        add(PlaygroundLang.WRENCH_CONFIGURE_STATE, "Configure State: %s");
+        add(PlaygroundLang.WRENCH_STATE, "State: %s");
+
+        // Wrench modes
+        add(PlaygroundLang.WRENCH_MODE_DISMANTLE, "Dismantle");
+        add(PlaygroundLang.WRENCH_MODE_ROTATE, "Rotate");
 
         // Descriptions
         add(PlaygroundLang.DESCRIPTION_SOLAR_GENERATOR, "A generator that generates energy during the day from sun.");

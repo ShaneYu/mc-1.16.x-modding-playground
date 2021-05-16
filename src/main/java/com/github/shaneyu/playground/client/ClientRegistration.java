@@ -15,6 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientRegistration {
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
+        MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
         MinecraftForge.EVENT_BUS.register(SoundHandler.class);
         new PlaygroundKeyHandler();
     }
